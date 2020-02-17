@@ -19,23 +19,23 @@ $donnees = $reponse->fetch()
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label class="title2">Nom</label>
-                    <input type="text" class="form-control" placeholder="<?= $donnees['lastname']?>" name="lastname"></input>
+                    <input type="text" class="form-control" value="<?= $donnees['lastname']?>" name="lastname"></input>
             </div>
             <div class="form-group col-md-6">
                 <label class="title2">Prénom</label>
-                    <input class="form-control" type="text" placeholder="<?= $donnees['firstname']?>" name="firstname"></input>
+                    <input class="form-control" type="text" value="<?= $donnees['firstname']?>" name="firstname"></input>
             </div>
             <div class="form-group col-md-4">
                 <label class="title2">Date de naissance</label>
-                    <input class="form-control" type="text" placeholder="<?= $donnees['birthdate']?>" name="birthdate"></input>
+                    <input class="form-control" type="text" value="<?= $donnees['birthdate']?>" name="birthdate"></input>
             </div>
             <div class="form-group col-md-4">
                 <label class="title2">Numéro de tél</label>
-                    <input class="form-control" type="tel" placeholder="<?= $donnees['phone']?>" name="phone"></input>
+                    <input class="form-control" type="tel" value="<?= $donnees['phone']?>" name="phone"></input>
             </div>
             <div class="form-group col-md-4">
                 <label class="title2">Email</label>
-                    <input class="form-control" type="email" placeholder="<?= $donnees['mail']?>" name="mail"></input>
+                    <input class="form-control" type="email" value="<?= $donnees['mail']?>" name="mail"></input>
             </div>
         </div>
         <button type="submit" class="btn btn-warning">Mofifier le patient</button>

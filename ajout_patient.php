@@ -4,7 +4,7 @@ include 'head.php';
 ?>   
 
 <h1>Bienvenue dans ton espace de création de patients.</h1>
-<form method="POST" action="ajout_patient.php">
+<form method="POST" enctype="multipart/form-data" action="ajout_patient.php">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label class="title2">Nom</label>
@@ -39,6 +39,7 @@ require_once 'db.php';
 if(!empty($_POST)){
 
     $req = $pdo->prepare("INSERT INTO patients SET lastname = ?, firstname = ?, birthdate = ?, phone = ?, mail = ?");
+    $img = file_get_contents ($_FILES['img']['tmp_name']);
     $req->execute([$_POST['lastname'], $_POST['firstname'], $_POST['birthdate'], $_POST['phone'], $_POST['mail']]);
     die('Votre patient a bien été créé');
     header('Location: http://localhost/Exercices-PDO-partie-2/');

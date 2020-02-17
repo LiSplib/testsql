@@ -19,7 +19,9 @@ while ($donnees = $reponse->fetch())
         </div>
         <p class="mb-1"><?= $donnees['dateHour']?></p>
     </a>
-    
+    <div class="col-2">
+    <button class="btn btn-danger">Supprimer</button>
+    </div>
             
 <?php
 }

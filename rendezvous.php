@@ -24,11 +24,11 @@ $donnees = $reponse->fetch()
             </div>
             <div class="form-group col-md-4">
                 <label class="title2">Nom</label>
-                    <input class="form-control" type="text" placeholder="<?= $donnees['lastname']?>" name="lastname"></input>
+                    <input class="form-control" type="text" value="<?= $donnees['lastname']?>" name="lastname"></input>
             </div>
             <div class="form-group col-md-4">
                 <label class="title2">Prénom</label>
-                    <input class="form-control" type="text" placeholder="<?= $donnees['firstname']?>" name="firstname"></input>
+                <input class="form-control" type="text" value="<?= $donnees['firstname']?>" name="firstname"></input>
             </div>
         </div>
         <button type="submit" class="btn btn-warning">Mofifier le rendez-vous</button>
@@ -48,8 +48,8 @@ $donnees = $reponse->fetch()
 
 if(!empty($_POST)){
 
-    $req = $pdo->prepare("UPDATE appointments SET appointments SET dateHour = ?, idPatients = ? WHERE appointments.id = '$getId'");
-    $req->execute([$_POST['date']. ' ' .$_POST['Hour'], $_POST['id']]);
+    $req = $pdo->prepare("UPDATE appointments SET dateHour = ? WHERE id = '$getId'");
+    $req->execute([$_POST['date']. ' ' .$_POST['Hour']]);
     die('Votre rendez-vous a bien été modifiée');
 
 }
