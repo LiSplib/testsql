@@ -4,7 +4,9 @@ require_once 'db.php';
 
 $getId = $_GET['id'];
 
-$reponse = $pdo->query("SELECT appointments.id AS id, dateHour, lastname, firstname FROM appointments JOIN patients ON appointments.idPatients = patients.id WHERE appointments.id = '$getId'");
+$reponse = $pdo->prepare("SELECT appointments.id AS id, DATE_FORMAT(dateHour, '%Y-%m-%d') AS date, DATE_FORMAT(dateHour, '%H:%i') AS Hour, lastname, firstname FROM appointments JOIN patients ON appointments.idPatients = patients.id WHERE appointments.id = :id");
+$reponse->bindParam(':id', $getId );
+$reponse->execute();
 ?>
 <section>
     <div>
@@ -17,10 +19,13 @@ $donnees = $reponse->fetch()
             
     <form method="POST" action="rendezvous.php?id=<?= $donnees['id']?>" class="newPosts">
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <label>RDV</label>
-                <input type="date" class="form-control" id="date" name="date">
-                <input type="time" class="form-control" id="hour" name="Hour">
+            <div class="form-group col-md-2">
+                <label>Date Rendez-vous</label>
+                <input type="date" class="form-control" id="date" name="date" value="<?=$donnees['date']?>"/>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Heure Rendez-vous</label>
+                <input type="time" class="form-control" id="hour" name="Hour" value="<?=$donnees['Hour']?>"/>
             </div>
             <div class="form-group col-md-4">
                 <label class="title2">Nom</label>
@@ -48,7 +53,8 @@ $donnees = $reponse->fetch()
 
 if(!empty($_POST)){
 
-    $req = $pdo->prepare("UPDATE appointments SET dateHour = ? WHERE id = '$getId'");
+    $req = $pdo->prepare("UPDATE appointments SET dateHour = ? WHERE id = :id");
+    $req->bindParam(':id', $getId );
     $req->execute([$_POST['date']. ' ' .$_POST['Hour']]);
     die('Votre rendez-vous a bien été modifiée');
 

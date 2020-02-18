@@ -14,7 +14,9 @@ $reponse = $pdo->query("SELECT * FROM patients");
         <div class="form-group">
             <label for="dateHour">Date du RDV</label>
             <input type="date" class="form-control" id="date" name="date">
-            <input type="time" class="form-control" id="hour" name="Hour">
+            <input type="time" class="form-control" id="hour" name="Hour" min="09:00" max="16:00" step="1800">
+            <small>Les heures d'ouvertures sont : 9h00-16h00</small><br>
+            <small>30min par RDV</small>
         </div>
     </div>
     <div class="input-group mb-3">
