@@ -37,7 +37,7 @@ $donnees = $reponse->fetch()
             </div>
         </div>
         <button type="submit" class="btn btn-warning">Mofifier le rendez-vous</button>
-        <a href="liste-rendezvous.php" class="btn btn-secondary">Retour</a>
+        <a href="liste-rendezvous.php" class="btn btn-outline-secondary">Retour</a>
     </form>
             
 <?php

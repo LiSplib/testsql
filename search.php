@@ -31,7 +31,7 @@ while($donnees = $reponse->fetch()){
             </div>
         </a>
         
-            <a href="liste-patients.php" class="btn btn-secondary">Retour</a>
+            <a href="liste-patients.php" class="btn btn-outline-secondary">Retour</a>
 <?php
         }?>
             
