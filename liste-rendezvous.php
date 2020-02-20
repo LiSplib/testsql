@@ -1,6 +1,7 @@
 <?php
 include 'head.php';
 require_once 'db.php';
+
 if(isset($_GET['delete'])){
     $getId = $_GET['delete'];
 
