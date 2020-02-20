@@ -1,5 +1,6 @@
-<?php
-include 'head.php';
+<?php $title = 'Liste Patients'; 
+ ob_start(); 
+
 require_once 'db.php';
 
 
@@ -9,8 +10,6 @@ if(isset($_GET['delete'])){
 $req = $pdo->prepare("DELETE FROM patients WHERE id = :id");
 $req->bindParam(':id', $getId );
     $req->execute();
-    // die('Votre rendez-vous a bien été supprimée');
-    // header('Location: http://localhost/Exercices-PDO-partie-2/liste-rendezvous.php');
 }
 
 if(isset($_GET['form_submit'])){
@@ -30,7 +29,6 @@ $reponse = $pdo->query("SELECT * FROM patients");
 
     <div class="col-12 mt-4">
         <h4>Voici la liste des patients : </h4>
-        <!-- <div class="list-group col-lg-6"> -->
         <table class="table table-hover table-dark">
             <thead>
                 <tr>
@@ -45,12 +43,6 @@ $reponse = $pdo->query("SELECT * FROM patients");
 while ($donnees = $reponse->fetch())
 {
     ?>
-        <!-- <a href="profil-patient.php?id=<?= $donnees['id']?>" class="list-group-item list-group-item-action bg-light mt-2 rounded">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><?= $donnees['lastname'].' '.$donnees['firstname']?></h5>
-                
-            </div>
-        </a> -->
         <tbody>
             <tr>
                 <th scope="row"><?=$donnees['id']?></th>
@@ -98,9 +90,9 @@ while ($donnees = $reponse->fetch())
                 </li>
             </ul>
         </nav>
-    <!-- </div> -->
     
 </section>
 
-<?php
-include 'footer.php';
+<?php $content = ob_get_clean(); 
+
+require('view/template.php'); ?>

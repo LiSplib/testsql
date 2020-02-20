@@ -1,5 +1,8 @@
 <?php
-include 'head.php';
+$title = 'Liste RDV';
+
+ob_start();
+
 require_once 'db.php';
 
 if(isset($_GET['delete'])){
@@ -14,12 +17,12 @@ $currentDate = new DateTime();
 $euDate = $currentDate->modify('+1 hour');
 $euDateFormat = $euDate->format('Y-m-d H:m:s');
 
-$reponse = $pdo->prepare("SELECT appointments.id AS id, DATE_FORMAT(dateHour, '%d/%m/%Y à %Hh%imin') AS dateHour, lastname, firstname  FROM appointments JOIN patients ON appointments.idPatients = patients.id WHERE dateHour > :euDate");
+$reponse = $pdo->prepare("SELECT appointments.id AS id, DATE_FORMAT(dateHour, '%d/%m/%Y à %Hh%imin') AS dateHour, lastname, firstname  FROM appointments JOIN patients ON appointments.idPatients = patients.id WHERE dateHour > :euDate ORDER BY dateHour");
 $reponse->bindParam(':euDate', $euDateFormat);
 $reponse->execute();
 ?>
 <section>
-        <h4>Voici la liste des rendez-vous : </h4>
+        <h4>Voici la liste des prochains rendez-vous : </h4>
             <div class="table-responsive">
             <table class="table table-hover table-dark">
                 <thead>
@@ -71,4 +74,6 @@ $reponse->closeCursor();
 
 <?php
 
-include 'footer.php';
+$content = ob_get_clean(); 
+
+require('view/template.php'); ?>

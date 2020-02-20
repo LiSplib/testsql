@@ -1,12 +1,23 @@
 <?php
-include 'head.php';
+$title = "Fiche Patient";
+
+ob_start();
+
 require_once 'db.php';
 
 if(!empty($_POST)){
 
-    $req = $pdo->prepare("UPDATE patients SET lastname = ?, firstname = ?, birthdate = ?, phone = ?, mail = ? WHERE id = :id");
-    $req->bindParam(':id', $getId );
-    $req->execute([$_POST['lastname'], $_POST['firstname'], $_POST['birthdate'], $_POST['phone'], $_POST['mail']]);
+    $req = $pdo->prepare("UPDATE patients SET lastname = :lastname, firstname = :firstname, birthdate = :birthdate, phone = :phone, mail = :mail WHERE id = :id");
+    // $req->bindParam(':id', $getId );
+    $req->execute([
+        "id" => $getId,
+        "lastname" => $_POST['lastname'], 
+        "firstname" => $_POST['firstname'], 
+        "birthdate" => $_POST['birthdate'], 
+        "phone" => $_POST['phone'], 
+        "mail" => $_POST['mail'],
+        
+        ]);
     die('Votre patient a bien été modifiée');
 
 }
@@ -91,6 +102,6 @@ require_once 'gestionTemps.php';
 <?php
 
 
+$content = ob_get_clean(); 
 
-
-include 'footer.php';
+require('view/template.php'); ?>

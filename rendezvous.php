@@ -61,9 +61,6 @@ $donnees = $reponse->fetch()
 <?php
 
 ?>
-        <!-- </div>
-    </div>
-     -->
 </section>
 
 <?php
@@ -71,10 +68,13 @@ $donnees = $reponse->fetch()
 
 if(!empty($_POST)){
 
-    $req = $pdo->prepare("UPDATE appointments SET dateHour = ? WHERE id = :id");
-    $req->bindParam(':id', $getId );
-    $req->execute([$_POST['date']. ' ' .$_POST['Hour']]);
-    die('Votre rendez-vous a bien été modifiée');
+    $req = $pdo->prepare("UPDATE appointments SET dateHour = :dateHour WHERE id = :id");
+    // $req->bindParam(':id', $getId );
+    $req->execute([
+        "id" => $getId,
+        "dateHour" => $_POST['date']. ' ' .$_POST['Hour']
+    ]);
+    echo 'Votre rendez-vous a bien été modifiée';
 
 }
 
