@@ -21,9 +21,12 @@ if(isset($_GET['id'])){
 }
 ?>
 <section>
-    <div>
-        <h4>Voici les infos du patient : </h4>
-            <div class="list-group">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <h4>Voici les infos du patient : </h4>
+                        <div class="list-group">
 <?php
 $donnees = $reponse->fetch()
 
@@ -61,32 +64,28 @@ $donnees = $reponse->fetch()
         </div>
         
     </div>
-       
+    </div>
+</div>
     
 </section>
 <section class="mt-4">
-        <h4>Voici la liste des rendez-vous : </h4>
-            <div class="list-group col-6">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <h4>Rendez-vous prévus : </h4>
+                        <div class="list-group ">
     <?php
         $reponse->closeCursor();
+        
+require_once 'gestionTemps.php';
 
-        $reponse = $pdo->prepare("SELECT patients.id AS patientId, appointments.id AS id, lastname, firstname, birthdate, phone, mail, DATE_FORMAT(dateHour, '%d/%m/%Y à %Hh%imin') AS dateHour FROM patients JOIN appointments ON patients.id = appointments.idPatients WHERE patients.id = :id");
-        $reponse->bindParam(':id', $getId);
-        $reponse->execute();
-        while ($donnees = $reponse->fetch())
-        {
+        
     ?>
-    
-                <a href="rendezvous.php?id=<?= $donnees['id']?>" class="list-group-item list-group-item-action bg-light mt-2 rounded">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><?= strtoupper($donnees['lastname'])?></h5>
-                    </div>
-                    <p class="mb-1 text-center"><?= $donnees['dateHour']?></p>
-                </a>
-                <?php
-        }
-                ?>
             </div>
+            </div>
+            </div>
+        </div>
     </section>
 
 <?php

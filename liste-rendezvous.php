@@ -7,16 +7,17 @@ if(isset($_GET['delete'])){
 $req = $pdo->prepare("DELETE FROM appointments WHERE id = :id");
 $req->bindParam(':id', $getId );
     $req->execute();
-    // die('Votre rendez-vous a bien été supprimée');
-    // header('Location: http://localhost/Exercices-PDO-partie-2/liste-rendezvous.php');
 }
 
+$currentDate = new DateTime();
+$euDate = $currentDate->modify('+1 hour');
+$euDateFormat = $euDate->format('Y-m-d H:m:s');
 
-$reponse = $pdo->prepare("SELECT appointments.id AS id, DATE_FORMAT(dateHour, '%d/%m/%Y à %Hh%imin') AS dateHour, lastname, firstname  FROM appointments JOIN patients ON appointments.idPatients = patients.id");
+$reponse = $pdo->prepare("SELECT appointments.id AS id, DATE_FORMAT(dateHour, '%d/%m/%Y à %Hh%imin') AS dateHour, lastname, firstname  FROM appointments JOIN patients ON appointments.idPatients = patients.id WHERE dateHour > :euDate");
+$reponse->bindParam(':euDate', $euDateFormat);
 $reponse->execute();
 ?>
 <section>
-    <!-- <div class="col-6"> -->
         <h4>Voici la liste des rendez-vous : </h4>
             <div class="table-responsive">
             <table class="table table-hover table-dark">
@@ -54,16 +55,7 @@ while ($donnees = $reponse->fetch())
             </a>
         </td>
     </tr>      
-    <!-- <a href="rendezvous.php?id=<?= $donnees['id']?>" class="list-group-item list-group-item-action bg-light mt-2 rounded">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"><?= $donnees['lastname']?></h5>
-        </div>
-        <p class="mb-1"><?= $donnees['dateHour']?></p>
-    </a>
-    <div class="col-2">
     
-    </div>
-             -->
 <?php
 }
 $reponse->closeCursor();
@@ -73,7 +65,6 @@ $reponse->closeCursor();
         </tbody>
     </table>
         </div>
-    <!-- </div> -->
     
 </section>
 

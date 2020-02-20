@@ -9,9 +9,7 @@ $reponse->bindParam(':id', $getId );
 $reponse->execute();
 ?>
 <section>
-    <!-- <div>
-        <p>Voici les infos du rendez-vous : </p>
-            <div class="list-group"> -->
+   
 <?php
 $donnees = $reponse->fetch()
 
