@@ -13,13 +13,9 @@ if(isset($_GET['form_submit'])){
 
 ?>
 <section>
-    <form class="form-inline ml-3">
-        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" name="search_name" aria-label="Search">
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="form_submit">Rechercher</button>
-    </form>
-
+    
     <div class="col-12 mt-4">
-        <p>Voici votre patient : </p>
+        <h4>Voici votre / vos patient : </h4>
         <div class="list-group col-lg-6">
 <?php
 while($donnees = $reponse->fetch()){
