@@ -1,18 +1,12 @@
 <?php
-$title = 'Ajout patient'; ?>
 
+$title = 'Ajout patient'; 
 
-<?php    
-require_once 'db.php';
+require_once 'controller.php';
+
 $create_status = '';
 
-
-if(!empty($_POST)){
-
-    $req = $pdo->prepare("INSERT INTO patients SET lastname = ?, firstname = ?, birthdate = ?, phone = ?, mail = ?");
-    $req->execute([$_POST['lastname'], $_POST['firstname'], $_POST['birthdate'], $_POST['phone'], $_POST['mail']]);
-    $create_status = 'Votre patient a bien été créé';
-}
+addPatient();
 
 ob_start();
 

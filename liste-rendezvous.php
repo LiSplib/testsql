@@ -8,8 +8,8 @@ require_once 'db.php';
 if(isset($_GET['delete'])){
     $getId = $_GET['delete'];
 
-$req = $pdo->prepare("DELETE FROM appointments WHERE id = :id");
-$req->bindParam(':id', $getId );
+    $req = $pdo->prepare("DELETE FROM appointments WHERE id = :id");
+    $req->bindParam(':id', $getId );
     $req->execute();
 }
 
@@ -68,7 +68,7 @@ $reponse->closeCursor();
 ?>
         </tbody>
     </table>
-        </div>
+</div>
     
 </section>
 
